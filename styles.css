@@ -1,0 +1,105 @@
+#main {
+	background: #fefefe;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	overflow: hidden;
+	-webkit-transform: translate3d(0,0,0) !important;
+	-webkit-font-smoothing: subpixel-antialiased !important;
+}
+
+.table {
+	width: 100%;
+	background: #444;
+	transition: 0.25s;
+	color: #eee !important;
+	padding: 2px;
+}
+
+.table:nth-child(even) {
+	width: 100%;
+	background: #666;
+	transition: 0.25s;
+	color: #eee !important;
+	padding: 2px;
+}
+
+.table:nth-child(odd) > .table-cell {
+	border-bottom: 1px #555 solid;
+}
+
+.table-cell {
+	border-bottom: 1px #777 solid;
+	height: 44px;
+	font-weight: 300;
+	padding: 12px;
+	height: auto;
+	//color: #eee;
+}
+
+.label-text {
+	color: #aaa;
+	transition: 0.15s;	
+}
+
+.scrollOuter {
+	overflow: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	width: 100%;
+}
+
+.scrollMiddle {
+	overflow: auto;
+	overflow-x: hidden;	
+	-webkit-overflow-scrolling: touch;
+	width: 100%;	
+}
+
+.scrollInner {
+	overflow: auto;
+	overflow-x: hidden;	
+	min-height: 101%;
+	width: 100%;
+	-webkit-transform: translate3d(0,0,0) !important;
+	-webkit-font-smoothing: subpixel-antialiased !important;	
+}
+
+pre {
+	white-space: pre-wrap;
+	font-size: 14px;
+	overflow: visible;
+	//font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-family: Helvetica Neue;
+	line-height: 1.25em;
+}
+
+
+.selectedItem {
+	transition: 0.35s;
+	background: linear-gradient(to right, #ddd 0%, #ccc 100%) !important;	
+	padding-top: 6px !important;
+	padding-bottom: 6px !important;
+	-webkit-transform: translate3d(0,0,0) !important;
+	-webkit-font-smoothing: subpixel-antialiased !important;
+	box-shadow: 0 0 16px #111;
+}
+
+.selectedItem > .table-cell {
+	color: #000;
+	transition: 0.35s;	
+	text-shadow: 0 1px 1px #fff;
+	border-bottom: 1px solid #999 !important;
+}
+
+.selectedItem > .table-cell > .label-text {
+	color: #333;
+	text-shadow: 0 1px 1px #fff;
+	transition: 0.35s;
+}
+
+.row {
+	max-width: 1920px;
+}
