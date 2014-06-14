@@ -14,7 +14,7 @@ function viewModel() {
 				else return 0;
 			});
 			ko.mapping.fromJS(data, {}, self.jobs);
-			self.showItem(null, 0);
+			self.showItem(0);
 		}
 	);
 
