@@ -9,31 +9,55 @@
 		<script src="knockout-3.1.0.js"></script>
 		<script src="knockout.mapping.js"></script>
 		<script src="moment.min.js"></script>		
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 		<script src="main.js"></script>
 
 	</head>
 
 
 	<body>
-		<div id="main" class="large-12 medium-12 small-12 columns" style="padding-left:0; padding-right: 0">
-			<div class="large-4 medium-4 small-4 columns" style="font-size: 11pt; padding-left: 0; padding-right: 0; background: #222">
-				<div>
-					<div class="scrollOuter">
-						<div class="scrollMiddle">
-							<div class="scrollInner" style="height: 100%">
-								<div data-bind="foreach: jobs">
-									<div class="table" style="color: #333; line-height: 1.3em; cursor: pointer" data-bind="click: $root.showItem.bind($data, $index()), css: { selectedItem : $root.isSelected(_id()) == true  }">
-										<div class="table-cell">
-											<span class="text-left" data-bind="text: title"></span>
-											<span class="label-text right show-for-medium-up">Nimike</span>
-										</div>
-										<div class="table-cell">
-											<span class="text-left" data-bind="text: company"></span>
-											<span class="label-text right show-for-medium-up">Työnantaja</span>							
-										</div>
-										<div class="table-cell" style="border-bottom: 0">
-											<span class="text-left" data-bind="text: moment(added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
-											<span class="label-text right show-for-medium-up">Lisätty</span>
+		<div id="main" style="padding-left:0; padding-right: 0">
+			<div style="box-shadow: 0 0 24px #333; width: 100%; z-index: 100; height: 48px; background: #000; position: absolute">
+				<div class="large-4 medium-4 small-4 columns" style="font-size: 11pt; padding-left: 0; padding-right: 0;">
+					<div>
+						<input data-bind="value: search, valueUpdate: 'input'" type="text" style="width: 100%; height: 32px; padding: 8px; margin-top: 8px; border-radius: 40px; border: 1px #ccc solid; font-size: 14px; color: #333; background: #f7f7f7; outline: none" placeholder="Nimike tai työnantaja...">
+						<div data-bind="visible: search() !== '', click: search.bind($data, '') ">
+							<div style="position: relative; top: -27px; float: right; padding-right: 4px">
+								<div id="searchReset">
+									x
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="large-8 medium-8 small-8 columns" style="color: #eee; padding-right: 0; padding-left: 0;">
+					<div>
+						<span></span>
+					</div>
+				</div>
+			</div>
+
+			<div style="position: absolute; top: 48px; left:0; right: 0; bottom: 0">
+				<div class="large-4 medium-4 small-4 columns" style="font-size: 11pt; padding-left: 0; padding-right: 0; background: #222;">
+					<div>
+						<div class="scrollOuter">
+							<div class="scrollMiddle">
+								<div class="scrollInner" style="height: 100%; padding-bottom: 12px">
+									<div data-bind="foreach: jobs">
+										<div class="table" style="color: #333; line-height: 1.3em; cursor: pointer" data-bind="click: $root.showItem.bind($data, $index()), css: { selectedItem : $root.isSelected(_id()) == true  }">
+											<div class="table-cell">
+												<span class="text-left" data-bind="text: title"></span>
+												<span class="label-text right show-for-medium-up">Nimike</span>
+											</div>
+											<div class="table-cell">
+												<span class="text-left" data-bind="text: company"></span>
+												<span class="label-text right show-for-medium-up">Työnantaja</span>							
+											</div>
+											<div class="table-cell" style="border-bottom: 0">
+												<span class="text-left" data-bind="text: moment(added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
+												<span class="label-text right show-for-medium-up">Lisätty</span>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -41,78 +65,87 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="large-8 medium-8 small-8 columns" style="color: #eee; padding-right: 0; padding-left: 0;">
-				<div class="scrollOuter">
-					<div class="scrollMiddle">
-						<div class="scrollInner" style="height: 100%">			
-							<div data-bind="if: displayedItem" style="padding-bottom: 24px">
-								<div class="row" style="border-bottom: 1px #666 solid; background: #444;">
-									<div class="large-12 medium-12 small-12 columns" >													
-										<h3 style="display: inline-block; color: #ddd" class="left subheader">
-											<span class="text-left" data-bind="text: $root.displayedItem().title"></span>
-										</h3>
-										<h3 style="display: inline-block; color: #ddd" class="right subheader">
-											<span class="text-right" data-bind="text: displayedItem().company"></span>
-										</h4>
+				<div class="large-8 medium-8 small-8 columns" style="color: #eee; padding-right: 0; padding-left: 0;">
+					<div class="scrollOuter">
+						<div class="scrollMiddle">
+							<div class="scrollInner" style="height: 100%;">			
+								<div data-bind="if: displayedItem" style="padding-bottom: 24px">
+									<div class="row" style="border-bottom: 1px #666 solid; background: #444;">
+										<div class="large-12 medium-12 small-12 columns" >													
+											<h3 style="display: inline-block; color: #ddd" class="left subheader">
+												<span class="text-left" data-bind="text: $root.displayedItem().title"></span>
+											</h3>
+											<h3 style="display: inline-block; color: #ddd" class="right subheader">
+												<span class="text-right" data-bind="text: displayedItem().company"></span>
+											</h4>
+										</div>
 									</div>
-								</div>
 
-								<div class="row" style="background: #444">
-									<div class="large-12 medium-12 small-12 columns" style="border-bottom: 1px #666 solid">
-										<h5 style="display: inline-block; color: #ddd" class="left subheader">
-											<span class="text-left" data-bind="text: moment(displayedItem().added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
-										</h5>
-										<h5 style="display: inline-block; color: #ddd" class="right subheader">
-											<span class="text-right" data-bind="text: displayedItem().address"></span>
-										</h5>
+									<div class="row" style="background: #444">
+										<div class="large-12 medium-12 small-12 columns" style="border-bottom: 1px #666 solid">
+											<h5 style="display: inline-block; color: #ddd" class="left subheader">
+												<span class="text-left" data-bind="text: moment(displayedItem().added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
+											</h5>
+											<h5 style="display: inline-block; color: #ddd" class="right subheader">
+												<span class="text-right" data-bind="text: displayedItem().address"></span>
+											</h5>
+										</div>
 									</div>
-								</div>
 
-								<div class="row" style="background: #555; color: #eee; padding: 8px; font-weight: 300">
-									<div style="padding: 4px">
-										<span class="label-text">Alkamisaika:</span>
-										<span data-bind="text: $data.displayedItem().begins || '-'"></span>
+									<div class="row" style="background: #555; color: #eee; padding: 8px; font-weight: 300">
+										<div style="padding: 4px">
+											<span class="label-text">Alkamisaika:</span>
+											<span data-bind="text: $data.displayedItem().begins || '-'"></span>
+										</div>
+										<div style="padding: 4px">
+											<span class="label-text">Kesto:</span>
+											<span data-bind="text: $data.displayedItem().duration || '-'"></span>
+										</div>
+										<div style="padding: 4px">
+											<span class="label-text">Tyyppi:</span>
+											<span data-bind="text: $data.displayedItem().type || '-'"></span>
+										</div>
+										<div style="padding: 4px">
+											<span class="label-text">Toivottu työkokemus:</span>
+											<span data-bind="text: $data.displayedItem().experience || '-'"></span>
+										</div>
+									</div>								
+
+									<div style="height: 48px"></div>
+
+									<div class="row">
+										<div class="large-12 medium-12 small-12 columns">
+											<pre id="description" style="display: inline-block; color: #444" class="left text-left" data-bind="text: displayedItem().description">
+											</pre>
+										</div>
 									</div>
-									<div style="padding: 4px">
-										<span class="label-text">Kesto:</span>
-										<span data-bind="text: $data.displayedItem().duration || '-'"></span>
-									</div>
-									<div style="padding: 4px">
-										<span class="label-text">Tyyppi:</span>
-										<span data-bind="text: $data.displayedItem().type || '-'"></span>
-									</div>
-									<div style="padding: 4px">
-										<span class="label-text">Toivottu työkokemus:</span>
-										<span data-bind="text: $data.displayedItem().experience || '-'"></span>
-									</div>
-								</div>								
-
-								<div style="height: 48px"></div>
-
-								<div class="row">
-									<div class="large-12 medium-12 small-12 columns">
-										<pre id="description" style="display: inline-block; color: #444" class="left text-left" data-bind="text: displayedItem().description">
-										</pre>
-									</div>
-								</div>
 
 
 
-								<div class="row" style="padding: 8px">
-									<div style="color: black" style="padding: 8px">
-										<span> Lähde:</span>
+									<div class="row" style="padding: 8px">
+										<div style="color: black" style="padding: 8px">
+											<span> Lähde:</span>
 
-										<a data-bind="attr: { href : displayedItem().sources.mol }">
-											<div data-bind="text: displayedItem().sources.mol"></div>
-										</a>
-										<a data-bind="attr: { href : displayedItem().sources.oikotie }">	
-											<div data-bind="text: displayedItem().sources.oikotie"></div>
-										</a>
-										<a data-bind="attr: { href : displayedItem().sources.vierityspalkki }">
-											<div data-bind="text: displayedItem().sources.vierityspalkki"></div>
-										</a>
+											<a data-bind="attr: { href : displayedItem().sources.mol }">
+												<div data-bind="text: displayedItem().sources.mol"></div>
+											</a>
+											<a data-bind="attr: { href : displayedItem().sources.oikotie }">	
+												<div data-bind="text: displayedItem().sources.oikotie"></div>
+											</a>
+											<a data-bind="attr: { href : displayedItem().sources.vierityspalkki }">
+												<div data-bind="text: displayedItem().sources.vierityspalkki"></div>
+											</a>
+											<a data-bind="attr: { href : displayedItem().sources.duunitori }">
+												<div data-bind="text: displayedItem().sources.duunitori"></div>
+											</a>
+											<a data-bind="attr: { href : displayedItem().sources.eilakaisla }">
+												<div data-bind="text: displayedItem().sources.eilakaisla"></div>
+											</a>
+											<a data-bind="attr: { href : displayedItem().sources.uranus }">
+												<div data-bind="text: displayedItem().sources.uranus"></div>
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>

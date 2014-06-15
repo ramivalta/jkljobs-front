@@ -32,11 +32,9 @@
 
 .table-cell {
 	border-bottom: 1px #777 solid;
-	height: 44px;
 	font-weight: 300;
-	padding: 12px;
+	padding: 8px;
 	height: auto;
-	//color: #eee;
 }
 
 .label-text {
@@ -103,3 +101,19 @@ pre {
 .row {
 	max-width: 1920px;
 }
+
+#searchReset {
+	color: #eee;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: #555;
+	padding-left: 6px;
+	border: 1px #999 solid;
+	font-size: 16px;
+}
+
+#searchReset:active {
+	background: #999;
+}
+
