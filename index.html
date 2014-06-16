@@ -85,7 +85,7 @@
 									<div class="row" style="border-bottom: 1px #666 solid; background: #444;">
 										<div class="large-12 medium-12 small-12 columns" >													
 											<h3 style="display: inline-block; color: #ddd" class="left subheader">
-												<span class="text-left" data-bind="text: $root.displayedItem().title"></span>
+												<span class="text-left" data-bind="text: displayedItem().title"></span>
 											</h3>
 											<h3 style="display: inline-block; color: #ddd" class="right subheader">
 												<span class="text-right" data-bind="text: displayedItem().company"></span>
@@ -96,7 +96,14 @@
 									<div class="row" style="background: #444">
 										<div class="large-12 medium-12 small-12 columns" style="border-bottom: 1px #666 solid">
 											<h5 style="display: inline-block; color: #ddd" class="left subheader">
-												<span class="text-left" data-bind="text: moment(displayedItem().added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
+
+												<span data-bind="visible: displayedItem().added()">
+													<span class="text-left" data-bind="text: moment(displayedItem().added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
+												</span>
+												<span data-bind="visible: !displayedItem().added()">
+													<span class="text-left">Ei päivämäärää</span>
+												</span>
+
 											</h5>
 											<h5 style="display: inline-block; color: #ddd" class="right subheader">
 												<span class="text-right" data-bind="text: displayedItem().address"></span>
