@@ -36,7 +36,7 @@ function viewModel() {
 	}
 
 	self.searchJobs = ko.computed(function() {
-		search = self.search().trim().split(" ");
+		var search = self.search().trim().split(" ");
 
 		var filt = jobs.filter(function(item) {
 			for (var i = 0; i < search.length; i++) {
