@@ -60,8 +60,14 @@
 												<span class="label-text right show-for-medium-up">Työnantaja</span>							
 											</div>
 											<div class="table-cell" style="border-bottom: 0">
-												<span class="text-left" data-bind="text: moment(added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
+												<span data-bind="visible: added()">
+													<span class="text-left" data-bind="text: moment(added(), 'YYYY-MM-DD').format('D.M.YYYY')"></span>
+												</span>
+												<span data-bind="visible: !added()">
+													<span class="text-left">Ei päivämäärää</span>
+												</span>
 												<span class="label-text right show-for-medium-up">Lisätty</span>
+
 											</div>
 										</div>
 									</div>
